@@ -1,40 +1,43 @@
 --!strict
 --author: @hashim.naim
 --date: 5/23/26
-type AOP = {
-	__index: AOP,
+type AOPImpl = {
+	__index: AOPImpl,
 	avaliable: { Instance },
-	create: (self: AOP, obj: Instance) -> AOP,
-	addObj: (self: AOP, obj: Instance) -> (),
-	getObj: (self: AOP, obj: Instance) -> (),
-	clearObjs: (self: AOP) -> (),
-	returnObj: (self: AOP, obj: Instance) -> (),
+	create: (self: AOPImpl, obj: Instance, avaliable: { Instance }) -> AOPImpl,
+	addObj: (self: AOPImpl, obj: Instance, avaliable: { Instance }) -> (),
+	getObj: (self: AOPImpl, obj: Instance, avaliable: { Instance }) -> (),
+	clearObjs: (self: AOPImpl, obj: Instance) -> (),
+	returnObj: (self: AOPImpl, obj: Instance, avaliable: { Instance }) -> (),
 }
 
-local AOP = {}
+type AOP = typeof(setmetatable({} :: {object: Instance}, {} :: AOPImpl));
+
+local AOP: AOP = {} :: AOP
 AOP.__index = AOP
 
 -- Creates a new AOP object
-function AOP.create(obj: Instance): AOP
+function AOP.create(obj): AOP
 	local self = {
-		avaliable = {},
+		obj = obj;
+		avaliable = {};
 	}
 	setmetatable(self, AOP)
 
 	return self
 end
 
-function AOP:addObj(obj: Instance)
+function AOP:addObj(obj)
 	return table.insert(self.avaliable, obj)
 end
 
 -- Grabs object from table.
-function AOP:getObj(obj: Instance)
+function AOP:getObj(obj)
 	return table.find(self.avaliable, obj)
 end
 
 -- Returns object to table.
-function AOP:returnObj(obj: Instance)
+function AOP:returnObj(obj)
 	return table.insert(self.avaliable, obj)
 end
 
