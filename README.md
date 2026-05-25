@@ -93,5 +93,3 @@ pool:clearObjs()
 ⚠️ This will destroy all stored instances.
 
 ---
-* add **template-based cloning (important missing feature)**
-* or turn it into a **GitHub repo structure with proper modules + docs + examples**
