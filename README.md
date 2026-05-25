@@ -1,7 +1,3 @@
-Here’s a clean **GitHub description + README-style intro** for your module (based on your current version), written like a real open-source Roblox library:
-
----
-
 # 📦 AOP — Simple Object Pooling Module (Luau)
 
 A lightweight **Object Pooling system** for Roblox built in Luau.
